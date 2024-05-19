@@ -1,17 +1,17 @@
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import HomePage from "./HomePage";
-import EntryPage from "./Entrypage";
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Entrypage from './app/Entrypage';
+import Homepage from './app/Homepage';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="EntryPage" component={EntryPage} />
-        <Stack.Screen name="HomePage" component={HomePage} />
+      <Stack.Navigator initialRouteName="Entrypage">
+        <Stack.Screen name="Entrypage" component={Entrypage} options={{ headerShown: false }} />
+        <Stack.Screen name="Homepage" component={Homepage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
