@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Button, Alert } from "react-native";
+import { StyleSheet, Text, View, Alert, Image, TouchableOpacity } from "react-native";
 import * as ImagePicker from 'expo-image-picker';
 
 export default function Homepage({ route }) {
@@ -29,8 +29,9 @@ export default function Homepage({ route }) {
   return (
     <View style={styles.container}>
       <Text>Merhaba {name}!</Text>
-     
-      <Button title="Open Camera" onPress={openCamera} />
+      <TouchableOpacity onPress={openCamera} style={styles.button}>
+        <Image source={require('../assets/camera-icon.png')} style={styles.icon} />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -40,7 +41,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent:"space-between",
-    paddingVertical:40,
+    justifyContent: "space-between",
+    paddingVertical: 40,
+  },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 15,
+    backgroundColor: '#0096FF',
+    borderRadius: 50,
+  },
+  icon: {
+    width: 40,
+    height: 40,
   },
 });
