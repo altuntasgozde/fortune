@@ -54,22 +54,25 @@ export default function Entrypage({ navigation }) {
           onCancel={hideDatePicker}
         />
       </View>
-
-      <Picker
-        selectedValue={relationshipStatus}
-        style={styles.input}
-        onValueChange={(itemValue) => setRelationshipStatus(itemValue)}
-      >
-        <Picker.Item label="Select Relationship Status" value="" />
-        <Picker.Item label="Single" value="Single" />
-        <Picker.Item label="In a Relationship" value="In a Relationship" />
-        <Picker.Item label="Engaged" value="Engaged" />
-        <Picker.Item label="Married" value="Married" />
-        <Picker.Item label="Divorced" value="Divorced" />
-      </Picker>
+      <View>
+        <Text>Relationship status</Text>
+        <View style={styles.pickerContainer}>
+          <Picker
+            selectedValue={relationshipStatus}
+            onValueChange={(itemValue) => setRelationshipStatus(itemValue)}
+          >
+            <Picker.Item label="Select Relationship Status" value="" />
+            <Picker.Item label="Single" value="Single" />
+            <Picker.Item label="In a Relationship" value="In a Relationship" />
+            <Picker.Item label="Engaged" value="Engaged" />
+            <Picker.Item label="Married" value="Married" />
+            <Picker.Item label="Divorced" value="Divorced" />
+          </Picker>
+        </View>
+      </View>
 
       <Button
-        title="Go to Homepage"
+        title="Sent"
         onPress={() =>
           navigation.navigate("Homepage", {
             name,
@@ -86,7 +89,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    
+
     justifyContent: "center",
     padding: 16,
   },
@@ -97,5 +100,11 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     paddingHorizontal: 8,
     justifyContent: "center",
+  },
+  pickerContainer: {
+    borderWidth: 1,
+    borderColor: "gray",
+
+    marginBottom: 12,
   },
 });
