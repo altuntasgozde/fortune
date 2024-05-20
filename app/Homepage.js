@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, Alert } from "react-native";
 import * as ImagePicker from 'expo-image-picker';
 
 export default function Homepage({ route }) {
-  const { name, dateOfBirth } = route.params;
+  const { name, dateOfBirth, relationshipStatus } = route.params;
 
   const openCamera = async () => {
     // Ask for camera permissions
@@ -28,9 +28,8 @@ export default function Homepage({ route }) {
 
   return (
     <View style={styles.container}>
-      <Text>Welcome to the Home Page!</Text>
-      <Text>Name: {name}</Text>
-      <Text>Date of Birth: {dateOfBirth}</Text>
+      <Text>Merhaba {name}!</Text>
+     
       <Button title="Open Camera" onPress={openCamera} />
     </View>
   );
@@ -41,6 +40,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent:"space-between",
+    paddingVertical:40,
   },
 });
