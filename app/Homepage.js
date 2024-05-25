@@ -6,23 +6,21 @@ import {
   Alert,
   Image,
   TouchableOpacity,
-  FlatList
+  FlatList,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import blogPosts from './blogPosts.json';
 
-export default function Homepage({ route }) {
-  const { name, dateOfBirth, relationshipStatus } = route.params;
+export default function Homepage({ route, navigation }) {
+  const { name } = route.params;
 
   const openCamera = async () => {
-    // Ask for camera permissions
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
     if (status !== "granted") {
       Alert.alert("Camera permissions are required to use the camera");
       return;
     }
 
-    // Launch the camera
     const result = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
       aspect: [4, 3],
@@ -31,16 +29,18 @@ export default function Homepage({ route }) {
 
     if (!result.cancelled) {
       Alert.alert("Image captured", `URI: ${result.uri}`);
-      // Here, you can handle the captured image, e.g., display it or upload it
     }
   };
 
   const renderItem = ({ item }) => (
-    <View style={styles.item}>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={() => navigation.navigate('PostDetail', { post: item })}
+    >
       <Text style={styles.title}>{item.title}</Text>
       <Text>{item.date}</Text>
       <Text style={styles.content}>{item.content}</Text>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
