@@ -6,8 +6,10 @@ import {
   Alert,
   Image,
   TouchableOpacity,
+  FlatList
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import blogPosts from './blogPosts.json';
 
 export default function Homepage({ route }) {
   const { name, dateOfBirth, relationshipStatus } = route.params;
@@ -33,20 +35,23 @@ export default function Homepage({ route }) {
     }
   };
 
+  const renderItem = ({ item }) => (
+    <View style={styles.item}>
+      <Text style={styles.title}>{item.title}</Text>
+      <Text>{item.date}</Text>
+      <Text style={styles.content}>{item.content}</Text>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
       <View>
         <Text>Merhaba {name}!</Text>
-        <View style={styles.newItem}>
-          <Text style={styles.badge}>New!</Text>
-          <Text>21.05.2024</Text>
-          <Text style={styles.itemText}>Donec lacus diam, pulvinar non dictum vel, pellentesque in odio. In venenatis facilisis dapibus. Cras dapibus faucibus ante id egestas.</Text>
-        </View>
-        <View style={styles.oldItem}>
-          
-          <Text>20.05.2024</Text>
-          <Text style={styles.itemText}>Donec lacus diam, pulvinar non dictum vel, pellentesque in odio. In venenatis facilisis dapibus. Cras dapibus faucibus ante id egestas.</Text>
-        </View>
+        <FlatList
+          data={blogPosts}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderItem}
+        />
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={openCamera} style={styles.button}>
@@ -64,7 +69,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingHorizontal:20,
+    paddingHorizontal: 20,
     justifyContent: "space-between",
     paddingVertical: 40,
   },
@@ -75,32 +80,24 @@ const styles = StyleSheet.create({
     backgroundColor: "#0096FF",
     borderRadius: 50,
   },
-  buttonContainer:{
-    alignItems:"center"
+  buttonContainer: {
+    alignItems: "center",
   },
   icon: {
     width: 40,
     height: 40,
   },
-  newItem: {
-    borderWidth:1,
-    borderLeftWidth:3,
-    borderColor:"black",
-    marginTop:30,
-    padding:10,
-    
+  item: {
+    borderWidth: 1,
+    borderColor: "black",
+    marginTop: 30,
+    padding: 10,
   },
-  oldItem: {
-    borderWidth:1,
-    borderColor:"black",
-    marginTop:30,
-    padding:10,
+  title: {
+    fontWeight: "bold",
   },
-  itemText:{
-    fontStyle:"italic"
+  content: {
+    fontStyle: "italic",
+    marginTop: 5,
   },
-  badge: {
-    fontWeight:"bold"
-  }
-  
 });
